@@ -9,4 +9,4 @@ const connection = await mysql.createConnection({
     port: '3306',
 });
 
-const db = drizzle({ client: connection });
+export const db = drizzle(connection);
