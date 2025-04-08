@@ -2,6 +2,7 @@
 import React, { use, useEffect } from 'react'
 import AddNewStudent from './_components/AddNewStudent'
 import Global_api from '@/app/_services/Global_api'
+import StudentListTable from './_components/StudentListTable';
 
 function Student() {
 
@@ -19,8 +20,10 @@ function Student() {
   return (
     <div className='p-7'>
       <h2 className='font-bold text-2xl flex justify-between items-center'>Students
-        <AddNewStudent/>
+        <AddNewStudent refreshData={GetAllStudents} />
       </h2>
+      <StudentListTable StudentList={studentList} refreshData={GetAllStudents} /> 
+
     </div>
   )
 }
