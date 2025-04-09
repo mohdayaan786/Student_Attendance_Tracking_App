@@ -1,36 +1,109 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 📌 Attendify - Student Attendance Tracking System
 
-## Getting Started
+Attendify is a modern and efficient **Student Attendance Tracking System** that helps educational institutions track student attendance seamlessly. It provides an intuitive dashboard, graphical insights, and secure authentication using **Kinde Auth**.
 
-First, run the development server:
+---
 
+## 🚀 Features
+
+- 🔐 **Secure Authentication** - Powered by Kinde Auth
+- 📊 **Intuitive Dashboard** - View attendance statistics
+- 📅 **Attendance Management** - Track student attendance by month & grade
+- 📈 **Graphical Insights** - Bar charts & pie charts for attendance trends
+- 👥 **Student Management** - Add, remove, and update student records
+- 🌍 **Multi-Language Support**
+- 🌑 **Dark Mode Support**
+- 🛠 **Role-Based Access Control** *(Upcoming)*
+
+---
+
+## 🛠 Tech Stack
+
+### **Frontend**
+- **Next.js** - React Framework
+- **Tailwind CSS** - Styling
+- **ShadCN UI** - UI Components
+- **Lucide Icons** - Icon Set
+
+### **Backend**
+- **Node.js** - JavaScript Runtime
+- **Next.js API Routes** - Backend API
+- **Kinde Auth** - Authentication
+
+### **Database & ORM**
+- **MySQL** - Relational Database
+- **Drizzle ORM** - Database Management
+
+---
+
+## ⚙️ Installation & Setup
+
+1️⃣ **Clone the Repository**
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+ git clone https://github.com/mohdayaan786/Student_Attendance_Tracking_App.git
+ cd Student_Attendance_Tracking_App
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2️⃣ **Install Dependencies**
+```bash
+ npm install
+```
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+3️⃣ **Set Up Environment Variables**
+Create a `.env.local` file and configure the following:
+```env
+KINDE_CLIENT_ID=4eee425283df48bdb5d2eb158df1de9f
+KINDE_CLIENT_SECRET=CdojQayXp5oUsfPXAImy3eYXuvQXL9OsoahClqFvmSl2JCn7qudey
+KINDE_ISSUER_URL=https://attendancetracker8071.kinde.com
+KINDE_SITE_URL=http://localhost:3000
+KINDE_POST_LOGOUT_REDIRECT_URL=http://localhost:3000
+KINDE_POST_LOGIN_REDIRECT_URL=http://localhost:3000/dashboard
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4️⃣ **Run the Development Server**
+```bash
+ npm run dev
+```
+Access the app at **`http://localhost:3000`**
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🔌 API Endpoints
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### **Authentication**
+- `POST /api/auth/login` - User login
+- `POST /api/auth/logout` - User logout
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### **Students**
+- `GET /api/students` - Fetch all students
+- `POST /api/students` - Add a new student
 
-## Deploy on Vercel
+### **Attendance**
+- `GET /api/attendance?grade=GRADE&date=MM/YYYY` - Fetch attendance records
+- `POST /api/attendance` - Add attendance record
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📌 Future Enhancements
+
+- 📱 **Mobile App Integration**
+- 🏫 **Multi-School Support**
+- 📜 **Attendance Reports Download**
+- 🛠 **Role-Based Access Control**
+
+---
+
+## 🤝 Contribution
+
+Contributions are welcome! Feel free to fork the repository and submit a pull request.
+
+---
+
+## 📜 License
+
+This project is **MIT Licensed**. You are free to modify and distribute it.
+
+---
+
+### ✨ Developed with ❤️ by **Mohd Ayaan**
+
