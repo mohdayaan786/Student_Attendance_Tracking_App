@@ -53,6 +53,7 @@ function StudentListTable({ StudentList, refreshData }) {
         { field: "name", filter: true },
         { field: "address", filter: true },
         { field: "contact", filter: true },
+        {field: "grade", filter: true},
         {
             field: "action",
             cellRenderer: CustomButtons,

@@ -1,0 +1,9 @@
+<svg id="Attendify" width="220" height="50" viewBox="0 0 220 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 25C0 11 11 0 25 0H50C64 0 75 11 75 25V50H25C11 50 0 39 0 25Z" fill="#4845D2"></path>
+  <rect x="8" y="8" width="60" height="30" rx="15" fill="#A5B4FC"></rect>
+  <circle cx="25" cy="25" r="8" fill="#000000"></circle>
+  <circle cx="22" cy="22" r="2" fill="#ffffff"></circle>
+  <circle cx="55" cy="25" r="8" fill="#000000"></circle>
+  <circle cx="52" cy="22" r="2" fill="#ffffff"></circle>
+  <text x="90" y="35" font-family="Arial, sans-serif" font-size="30" fill="#4845D2" font-weight="bold">Attendify</text>
+</svg>
