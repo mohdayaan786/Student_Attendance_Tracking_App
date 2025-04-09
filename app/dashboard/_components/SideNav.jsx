@@ -70,7 +70,7 @@ export default function SideNav() {
 
             <div className="flex gap-2 items-center bottom-5 fixed p-2">
                 <Image
-                    src={"/225-default-avatar.svg" || user?.picture} // Use default image if empty
+                    src={user?.picture || "/225-default-avatar.svg"} // Use default image if empty
                     width={35}
                     height={35}
                     className="rounded-full"
