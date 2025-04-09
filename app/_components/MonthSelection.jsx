@@ -11,14 +11,15 @@ import { addMonths } from "date-fns";
 import moment from "moment";
 import { Calendar } from "@/components/ui/calendar";
 
-function MonthSelection({ selectedMonth }) {
+function MonthSelection({ selectedMonth, setSelectedMonth }) { // ✅ Accept setSelectedMonth as a prop
     const today = new Date();
     const [month, setMonth] = useState(addMonths(today, 0)); // Default to current month
 
     const handleMonthChange = (value) => {
         if (value) {
             setMonth(value);
-            selectedMonth?.(value); // Ensure selectedMonth is correctly updated
+            setSelectedMonth(value); // ✅ Correct: This updates the state in `Dashboard.js`
+            console.log("🟢 Month selected:", moment(value).format("MM/YYYY")); // Debug log
         }
     };
 
@@ -35,7 +36,7 @@ function MonthSelection({ selectedMonth }) {
                     <Calendar
                         mode="single"
                         selected={month}
-                        onSelect={handleMonthChange} // Fix: Use `onSelect` instead of `onMonthChange`
+                        onSelect={handleMonthChange} // ✅ Fix: onSelect updates state
                         className="flex flex-1 justify-center"
                     />
                 </PopoverContent>
@@ -43,5 +44,6 @@ function MonthSelection({ selectedMonth }) {
         </div>
     );
 }
+
 
 export default MonthSelection;

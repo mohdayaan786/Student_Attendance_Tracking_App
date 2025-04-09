@@ -25,7 +25,7 @@ function Attendance() {
             <div className="flex gap-5 my-5 p-5 border rounded-lg shadow-sm">
                 <div className="flex gap-2 items-center">
                     <label>Select Month :</label>
-                    <MonthSelection selectedMonth={setSelectedMonth} />
+                    <MonthSelection selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} />
                 </div>
                 <div className="flex gap-2 items-center">
                     <label>Select Grade :</label>
