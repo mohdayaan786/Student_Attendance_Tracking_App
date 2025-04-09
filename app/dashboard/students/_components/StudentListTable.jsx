@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { AgGridReact } from "ag-grid-react";
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community'; 
+import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 ModuleRegistry.registerModules([AllCommunityModule]);
 
 import { Button } from "@/components/ui/button";
@@ -15,10 +15,10 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
     AlertDialogTrigger,
-  } from "@/components/ui/alert-dialog"
+} from "@/components/ui/alert-dialog"
 import Global_api from "@/app/_services/Global_api";
 import { toast } from "sonner";
-  
+
 
 
 function StudentListTable({ StudentList, refreshData }) {
@@ -40,21 +40,21 @@ function StudentListTable({ StudentList, refreshData }) {
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                         <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction onClick={()=>DeleteRecord(props?.data?.id)} className="bg-blue-700 hover:bg-blue-800 text-white">Continue</AlertDialogAction>
+                        <AlertDialogAction onClick={() => DeleteRecord(props?.data?.id)} className="bg-blue-700 hover:bg-blue-800 text-white">Continue</AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
         );
     };
-    
+
 
     const colDefs = useMemo(() => [
-        { field: "id", filter:true },
-        { field: "name" , filter:true},
-        { field: "address", filter:true },
-        { field: "contact", filter:true },
-        { 
-            field: "action", 
+        { field: "id", filter: true },
+        { field: "name", filter: true },
+        { field: "address", filter: true },
+        { field: "contact", filter: true },
+        {
+            field: "action",
             cellRenderer: CustomButtons,
             filter: false,
             suppressColumnsToolPanel: true,
@@ -67,13 +67,13 @@ function StudentListTable({ StudentList, refreshData }) {
 
     useEffect(() => {
         if (StudentList && StudentList.length > 0) {
-            const filteredData = searchInput.trim() 
+            const filteredData = searchInput.trim()
                 ? StudentList.filter(student => {
                     // Search across all string fields
                     return Object.entries(student).some(([key, value]) => {
                         // Skip action column and non-string fields
                         if (key === 'action' || typeof value !== 'string') return false;
-                        
+
                         return value.toLowerCase().includes(searchInput.toLowerCase());
                     });
                 })
@@ -84,7 +84,7 @@ function StudentListTable({ StudentList, refreshData }) {
 
     const DeleteRecord = (id) => {
         Global_api.DeleteStudent(id).then(resp => {
-            if(resp){
+            if (resp) {
                 toast("Student Deleted Successfully!");
                 refreshData();
             }
@@ -95,7 +95,7 @@ function StudentListTable({ StudentList, refreshData }) {
         <div>
             <div className="ag-theme-quartz" style={{ height: 500, width: "100%" }}>
                 <div className="p-2 rounded-lg border shadow-sm flex gap-2 mb-4 max-w-sm">
-                    <Search/>
+                    <Search />
                     <input
                         type="text"
                         placeholder="Search anything..."

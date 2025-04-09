@@ -31,9 +31,9 @@ function BarChartComponent({ attendanceList, totalPresentData }) {
 
     return (
         <div className="p-5 border rounded-lg shadow-sm">
-            <h2 className="font-bold text-lg my-2">Attendance Chart</h2> 
+            <h2 className="font-bold text-lg my-2">Attendance Chart</h2>
             <ResponsiveContainer width={"100%"} height={300}>
-                <BarChart  data={data}>
+                <BarChart data={data}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="day" />
                     <YAxis />

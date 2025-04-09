@@ -25,6 +25,6 @@ export async function GET(req, res) {
 export async function DELETE(req, res) {
     const searchParams = req.nextUrl.searchParams;
     const id = searchParams.get("id");
-    const result = await db.delete(STUDENTS).where(eq(STUDENTS.id,id));
+    const result = await db.delete(STUDENTS).where(eq(STUDENTS.id, id));
     return NextResponse.json(result);
 }

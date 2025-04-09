@@ -9,7 +9,7 @@ export default function layout({ children }) {
                 <SideNav />
             </div>
             <div className='md:ml-64'>
-                <Header/>
+                <Header />
                 {children}
             </div>
         </div>

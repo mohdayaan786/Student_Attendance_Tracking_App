@@ -3,7 +3,7 @@ import { ATTENDACE, STUDENTS } from "@/utils/schema";
 import { and, eq, is, isNull, or } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
-export async function GET(req){
+export async function GET(req) {
     const searchParams = req.nextUrl.searchParams;
     const month = searchParams.get("month");
     const grade = searchParams.get("grade");
@@ -17,14 +17,14 @@ export async function GET(req){
         studentId: STUDENTS.id,
         attendanceId: ATTENDACE.id
     })
-    .from(STUDENTS)
-      .leftJoin(ATTENDACE, and(eq(STUDENTS.id,ATTENDACE.studentId),eq(ATTENDACE.date, month)))
-      .where(eq(STUDENTS.grade,grade))
+        .from(STUDENTS)
+        .leftJoin(ATTENDACE, and(eq(STUDENTS.id, ATTENDACE.studentId), eq(ATTENDACE.date, month)))
+        .where(eq(STUDENTS.grade, grade))
 
-      return NextResponse.json(result)
+    return NextResponse.json(result)
 }
 
-export async function POST(req){
+export async function POST(req) {
     const body = await req.json();
     const { studentId, present, day, date } = body;
     const result = await db.insert(ATTENDACE).values({
@@ -44,13 +44,13 @@ export async function DELETE(req) {
     const day = searchParams.get('day');
 
     const result = await db.delete(ATTENDACE)
-    .where(
-        and(
-            eq(ATTENDACE.studentId, studentId),
-            eq(ATTENDACE.day, day),
-            eq(ATTENDACE.date, date)
+        .where(
+            and(
+                eq(ATTENDACE.studentId, studentId),
+                eq(ATTENDACE.day, day),
+                eq(ATTENDACE.date, date)
+            )
         )
-    )
 
     return NextResponse.json(result);
 }

@@ -16,14 +16,14 @@ export async function GET(req) {
         day: ATTENDACE.day,
         presentCount: sql`count(${ATTENDACE.day})`
     }).from(ATTENDACE)
-    .innerJoin(STUDENTS, eq(ATTENDACE.studentId, STUDENTS.id))
-    .where(and(
-        eq(ATTENDACE.date, sql`${date}`), // Ensure `date` is treated as a string
-        eq(STUDENTS.grade, sql`${grade}`) // Ensure `grade` is treated as a string
-    ))
-    .groupBy(ATTENDACE.day)
-    .orderBy(desc(ATTENDACE.day))
-    .limit(7);
+        .innerJoin(STUDENTS, eq(ATTENDACE.studentId, STUDENTS.id))
+        .where(and(
+            eq(ATTENDACE.date, sql`${date}`), // Ensure `date` is treated as a string
+            eq(STUDENTS.grade, sql`${grade}`) // Ensure `grade` is treated as a string
+        ))
+        .groupBy(ATTENDACE.day)
+        .orderBy(desc(ATTENDACE.day))
+        .limit(7);
 
     console.log("✅ Query Result from DB:", result);
 

@@ -40,7 +40,7 @@ export default function SideNav() {
     useEffect(() => {
         console.log(path);
     }
-    , [path]);
+        , [path]);
 
     return (
         <div className="border shadow-md h-screen bg-white dark:bg-gray-800">
@@ -55,16 +55,16 @@ export default function SideNav() {
             <hr className="my-5" />
 
             {menuList.map((menu) => (
-                <Link key={menu.id} href= {menu.path}>
-                <h2
-                    className={`flex items-center gap-3 text-md p-4 ml-2 mr-2
+                <Link key={menu.id} href={menu.path}>
+                    <h2
+                        className={`flex items-center gap-3 text-md p-4 ml-2 mr-2
                          text-slate-500 hover:bg-blue-800 hover:text-white 
                          rounded-lg cursor-pointer my-2
                          ${path === menu.path ? "bg-blue-800 text-white" : ""}
                          `}>
-                    <menu.icon />
-                    {menu.name}
-                </h2>
+                        <menu.icon />
+                        {menu.name}
+                    </h2>
                 </Link>
             ))}
 

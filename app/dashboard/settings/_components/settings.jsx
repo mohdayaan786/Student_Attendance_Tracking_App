@@ -45,7 +45,7 @@ export default function SettingsPage() {
     return (
         <div className="w-full max-w-[1200px] mx-auto p-6 bg-white dark:bg-gray-900 shadow-md rounded-lg mt-5">
             <h1 className="text-2xl font-semibold text-gray-800 dark:text-white mb-4">⚙️ Settings</h1>
-    
+
             {/* Profile Info */}
             <div className="flex items-center gap-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg mb-4">
                 <Image
@@ -62,7 +62,7 @@ export default function SettingsPage() {
                     <p className="text-sm text-gray-600 dark:text-gray-400">{user?.email}</p>
                 </div>
             </div>
-    
+
             {/* Theme Toggle */}
             <div className="flex items-center justify-between mb-4">
                 <span className="text-gray-700 dark:text-gray-300">Theme</span>
@@ -71,7 +71,7 @@ export default function SettingsPage() {
                     {darkMode ? "Light Mode" : "Dark Mode"}
                 </Button>
             </div>
-    
+
             {/* Language Selection */}
             <div className="flex items-center justify-between mb-4">
                 <span className="text-gray-700 dark:text-gray-300">Language</span>
@@ -85,7 +85,7 @@ export default function SettingsPage() {
                     <option value="Spanish">Spanish</option>
                 </select>
             </div>
-    
+
             {/* Notifications Toggle */}
             <div className="flex items-center justify-between mb-4">
                 <span className="text-gray-700 dark:text-gray-300">Notifications</span>
@@ -97,7 +97,7 @@ export default function SettingsPage() {
                     <Bell size={18} /> {notifications ? "Enabled" : "Disabled"}
                 </Button>
             </div>
-    
+
             {/* Change Password */}
             <div className="flex items-center justify-between mb-4">
                 <span className="text-gray-700 dark:text-gray-300">Change Password</span>
@@ -105,7 +105,7 @@ export default function SettingsPage() {
                     <Lock size={18} /> Update
                 </Button>
             </div>
-    
+
             {/* Switch Account */}
             <div className="flex items-center justify-between mb-4">
                 <span className="text-gray-700 dark:text-gray-300">Switch Account</span>
@@ -113,7 +113,7 @@ export default function SettingsPage() {
                     <Users size={18} /> Switch
                 </Button>
             </div>
-    
+
             {/* Logout */}
             <div className="flex items-center justify-between">
                 <span className="text-gray-700 dark:text-gray-300">Logout</span>
@@ -122,5 +122,5 @@ export default function SettingsPage() {
                 </Button>
             </div>
         </div>
-    );    
+    );
 }

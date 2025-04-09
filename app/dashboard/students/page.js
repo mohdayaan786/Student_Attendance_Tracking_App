@@ -22,7 +22,7 @@ function Student() {
       <h2 className='font-bold text-2xl flex justify-between items-center'>Students
         <AddNewStudent refreshData={GetAllStudents} />
       </h2>
-      <StudentListTable StudentList={studentList} refreshData={GetAllStudents} /> 
+      <StudentListTable StudentList={studentList} refreshData={GetAllStudents} />
 
     </div>
   )
