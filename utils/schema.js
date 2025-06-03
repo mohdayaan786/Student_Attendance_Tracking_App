@@ -1,23 +1,60 @@
-import { int, mysqlTable, varchar, boolean } from "drizzle-orm/mysql-core";
+// models/index.js or models/models.js
+import mongoose from 'mongoose';
 
-export const GRADES = mysqlTable('grades', {
-  id: int('id').primaryKey(),
-  grade: varchar('grade', { length: 10 }).notNull()
+// Avoid model overwrite issues in Next.js hot-reload
+const gradeSchema = new mongoose.Schema({
+  grade: {
+    type: String,
+    required: true,
+    maxlength: 10,
+  },
 });
 
-export const STUDENTS = mysqlTable('students', {
-  id: int('id').autoincrement().primaryKey(),
-  name: varchar('name', { length: 20 }).notNull(),
-  grade: varchar('grade', { length: 10 }).notNull(),
-  address: varchar('address', { length: 50 }),
-  contact: varchar('contact', { length: 11 }),
+const studentSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    maxlength: 20,
+  },
+  grade: {
+    type: String,
+    required: true,
+    maxlength: 10,
+  },
+  address: {
+    type: String,
+    maxlength: 50,
+  },
+  contact: {
+    type: String,
+    maxlength: 11,
+  },
 });
 
-export const ATTENDACE = mysqlTable('attendance', {
-  id: int('id').autoincrement().primaryKey(),
-  studentId: int('studentId', { length: 11 }).notNull(),
-  present: boolean('present').default(false),
-  day: int('day', { length: 11 }).notNull(), // 22
-  date: varchar('date', { length: 20 }).notNull() // 05/2024
+const attendanceSchema = new mongoose.Schema({
+  studentId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Student',
+    required: true,
+  },
+  present: {
+    type: Boolean,
+    default: false,
+  },
+  day: {
+    type: Number,
+    required: true,
+  },
+  date: {
+    type: String,
+    required: true,
+    maxlength: 20,
+  },
 });
 
+// Prevent model overwrite error in dev (Next.js hot reload)
+const Grade = mongoose.models.Grade || mongoose.model('Grade', gradeSchema);
+const Student = mongoose.models.Student || mongoose.model('Student', studentSchema);
+const Attendance = mongoose.models.Attendance || mongoose.model('Attendance', attendanceSchema);
+
+export { Grade, Student, Attendance };

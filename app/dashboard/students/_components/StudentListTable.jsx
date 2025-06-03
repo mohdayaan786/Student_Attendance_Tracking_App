@@ -40,7 +40,7 @@ function StudentListTable({ StudentList, refreshData }) {
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                         <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction onClick={() => DeleteRecord(props?.data?.id)} className="bg-blue-700 hover:bg-blue-800 text-white">Continue</AlertDialogAction>
+                        <AlertDialogAction onClick={() => DeleteRecord(props?.data?._id)} className="bg-blue-700 hover:bg-blue-800 text-white">Continue</AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
@@ -49,7 +49,7 @@ function StudentListTable({ StudentList, refreshData }) {
 
 
     const colDefs = useMemo(() => [
-        { field: "id", filter: true },
+        { field: "_id", headerName: "ID", filter: true },
         { field: "name", filter: true },
         { field: "address", filter: true },
         { field: "contact", filter: true },

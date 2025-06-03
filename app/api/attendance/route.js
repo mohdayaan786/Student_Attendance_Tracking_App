@@ -1,56 +1,85 @@
-import { db } from "@/utils";
-import { ATTENDACE, STUDENTS } from "@/utils/schema";
-import { and, eq, is, isNull, or } from "drizzle-orm";
+import dbConnect from "@/utils/index";          // Your MongoDB connection utility
+import { Attendance, Student } from "@/utils/schema"; // Your Mongoose models
 import { NextResponse } from "next/server";
 
 export async function GET(req) {
-    const searchParams = req.nextUrl.searchParams;
-    const month = searchParams.get("month");
-    const grade = searchParams.get("grade");
+  await dbConnect();
 
-    const result = await db.select({
-        name: STUDENTS.name,
-        present: ATTENDACE.present,
-        day: ATTENDACE.day,
-        date: ATTENDACE.date,
-        grade: STUDENTS.grade,
-        studentId: STUDENTS.id,
-        attendanceId: ATTENDACE.id
-    })
-        .from(STUDENTS)
-        .leftJoin(ATTENDACE, and(eq(STUDENTS.id, ATTENDACE.studentId), eq(ATTENDACE.date, month)))
-        .where(eq(STUDENTS.grade, grade))
+  const searchParams = req.nextUrl.searchParams;
+  const month = searchParams.get("month");
+  const grade = searchParams.get("grade");
 
-    return NextResponse.json(result)
+  try {
+    // Find students with the given grade
+    // and populate their attendance for the given month
+    const studentsWithAttendance = await Student.find({ grade })
+      .lean()
+      .exec();
+
+    // For each student, find attendance matching the month (date)
+    const results = await Promise.all(
+      studentsWithAttendance.map(async (student) => {
+        const attendance = await Attendance.findOne({
+          studentId: student._id,
+          date: month,
+        }).lean();
+
+        return {
+          name: student.name,
+          present: attendance ? attendance.present : false,
+          day: attendance ? attendance.day : null,
+          date: attendance ? attendance.date : null,
+          grade: student.grade,
+          studentId: student._id,
+          attendanceId: attendance ? attendance._id : null,
+        };
+      })
+    );
+
+    return NextResponse.json(results);
+  } catch (error) {
+    return NextResponse.json({ error: "Failed to fetch attendance" }, { status: 500 });
+  }
 }
 
 export async function POST(req) {
-    const body = await req.json();
-    const { studentId, present, day, date } = body;
-    const result = await db.insert(ATTENDACE).values({
-        studentId,
-        present,
-        day,
-        date
-    })
+  await dbConnect();
+
+  const { studentId, present, day, date } = await req.json();
+
+  try {
+    const attendance = new Attendance({
+      studentId,
+      present,
+      day,
+      date,
+    });
+
+    const result = await attendance.save();
+
     return NextResponse.json(result);
+  } catch (error) {
+    return NextResponse.json({ error: "Failed to save attendance" }, { status: 500 });
+  }
 }
 
-
 export async function DELETE(req) {
-    const searchParams = req.nextUrl.searchParams;
-    const studentId = searchParams.get('studentId');
-    const date = searchParams.get('date');
-    const day = searchParams.get('day');
+  await dbConnect();
 
-    const result = await db.delete(ATTENDACE)
-        .where(
-            and(
-                eq(ATTENDACE.studentId, studentId),
-                eq(ATTENDACE.day, day),
-                eq(ATTENDACE.date, date)
-            )
-        )
+  const searchParams = req.nextUrl.searchParams;
+  const studentId = searchParams.get("studentId");
+  const date = searchParams.get("date");
+  const day = Number(searchParams.get("day")); // Ensure day is number
+
+  try {
+    const result = await Attendance.deleteOne({
+      studentId,
+      day,
+      date,
+    });
 
     return NextResponse.json(result);
+  } catch (error) {
+    return NextResponse.json({ error: "Failed to delete attendance" }, { status: 500 });
+  }
 }

@@ -1,9 +1,15 @@
-import { db } from "@/utils";
-import { GRADES } from "@/utils/schema";
+import dbConnect from "@/utils/index"; // Your MongoDB connection utility
+import { Grade } from "@/utils/schema"; // Your Grade model
 import { NextResponse } from "next/server";
 
 export async function GET(req) {
-    const result = await db.select().from(GRADES);
+    await dbConnect(); // ensure DB connection
 
-    return NextResponse.json(result);
+    try {
+        const result = await Grade.find({}).lean(); // fetch all grades
+        return NextResponse.json(result);
+    } catch (error) {
+        console.error("Failed to fetch grades:", error);
+        return NextResponse.json({ error: "Failed to fetch grades" }, { status: 500 });
+    }
 }

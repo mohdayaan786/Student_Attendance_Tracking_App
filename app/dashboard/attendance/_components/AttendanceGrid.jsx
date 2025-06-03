@@ -16,8 +16,13 @@ function AttendanceGrid({ attendanceList, selectedMonth }) {
         { field: 'name', filter: true },
     ]);
 
-    const daysInMonth = (year, month) => new Date(year, month, 0).getDate();
-    const noOfDays = daysInMonth(moment(selectedMonth).format('yyyy'), moment(selectedMonth).format('MM'));
+    const daysInMonth = (year, month) => new Date(year, month, 0).getDate(); // month is 1-based
+
+    const selectedDate = moment(selectedMonth); // assume selectedMonth is a valid date string
+    const year = selectedDate.year();
+    const month = selectedDate.month() + 1;  // moment's month() is 0-based
+
+    const noOfDays = daysInMonth(year, month);
     const dateArrays = Array.from({ length: noOfDays }, (_, i) => i + 1);
 
     useEffect(() => {
