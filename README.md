@@ -2,6 +2,8 @@
 
 Attendify is a modern and efficient **Student Attendance Tracking System** that helps educational institutions track student attendance seamlessly. It provides an intuitive dashboard, graphical insights, and secure authentication using **Kinde Auth**.
 
+**🌐 Live Demo**: [https://student-attendance-tracking-app-4tm.vercel.app/](https://student-attendance-tracking-app-4tm.vercel.app/)
+
 ---
 
 ## 🚀 Features
